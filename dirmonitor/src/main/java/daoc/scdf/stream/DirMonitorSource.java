@@ -20,6 +20,7 @@ import org.springframework.integration.support.MessageBuilder;
 public class DirMonitorSource {
 
 	public static final String dirPath = "/root/scdf/shared/";
+	//public static final String dirPath = "C:\\Users\\ordon\\Downloads\\";
 	
 	@Autowired
 	private Source source;
@@ -29,25 +30,30 @@ public class DirMonitorSource {
 	}
 	
 	@PostConstruct
-	public void watch() {
-		WatchService watchService;
-		try {
-			watchService = FileSystems.getDefault().newWatchService();
-			Path dir = Paths.get(dirPath);	
-			dir.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
-	
-			WatchKey key;
-			while ((key = watchService.take()) != null) {
-				for (WatchEvent<?> event : key.pollEvents()) {
-					if(event.context().toString().endsWith(".txt")) {
-						String file = dirPath + event.context();
-						sendEvents(file);
-					} 
+	public void watch() {		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				WatchService watchService;
+				try {
+					watchService = FileSystems.getDefault().newWatchService();
+					Path dir = Paths.get(dirPath);	
+					dir.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
+			
+					WatchKey key;
+					while ((key = watchService.take()) != null) {
+						for (WatchEvent<?> event : key.pollEvents()) {
+							if(event.context().toString().endsWith(".txt")) {
+								String file = dirPath + event.context();
+								sendEvents(file);
+							} 
+						}
+						key.reset();
+					}
+				} catch (IOException | InterruptedException e) {
+					e.printStackTrace();
 				}
-				key.reset();
 			}
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-		}
+		}).start();
 	}
 }
