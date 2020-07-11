@@ -45,16 +45,16 @@ Vaya al dashboard de SCDF: http://host:9393/dashboard/#/apps y por cada una de l
 
 - De click en: "Add Application(s)" y seleccione "Register one or more applications"
 - Ingrese la información solicitada (solo Name, Type y URI) y luego de click en "Register the application(s)"
--- Para dirmonitor
---- Name: dirmon (o el nombre que desee)
---- Type: Source
---- URI: file://root/scdf/dirmonitor-0.0.1-SNAPSHOT.jar
--- Para filewordcount
---- Name: fwcount (o el nombre que desee)
---- Type: Processor
---- URI: file://root/scdf/filewordcount-0.0.1-SNAPSHOT.jar
--- Para wordcountfilesink
---- Name: wcsink (o el nombre que desee)
---- Type: Sink
---- URI: file://root/scdf/wordcountfilesink-0.0.1-SNAPSHOT.jar
+  - Para dirmonitor
+    - Name: dirmon (o el nombre que desee)
+    - Type: Source
+    - URI: file://root/scdf/dirmonitor-0.0.1-SNAPSHOT.jar
+  - Para filewordcount
+    - Name: fwcount (o el nombre que desee)
+    - Type: Processor
+    - URI: file://root/scdf/filewordcount-0.0.1-SNAPSHOT.jar
+  - Para wordcountfilesink
+    - Name: wcsink (o el nombre que desee)
+    - Type: Sink
+    - URI: file://root/scdf/wordcountfilesink-0.0.1-SNAPSHOT.jar
 
