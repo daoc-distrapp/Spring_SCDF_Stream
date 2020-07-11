@@ -62,7 +62,7 @@ Cree la definción de la stream en http://us1.local:9393/dashboard/#/streams/def
 
 - De click en "Create stream(s)"
 - En el cuadro de texto "Enter stream definition..." escriba: `dirmon | fwcount | wcsink`
-- De click en "CreateStream(s)"
+- De click en "Create Stream(s)"
 - Escriba en Name: mi-stream (o el nombre que prefiera)
 - De click en "Create the stream"
 - Ubique mi-stream y de click en "Deploy stream"
@@ -70,7 +70,7 @@ Cree la definción de la stream en http://us1.local:9393/dashboard/#/streams/def
 
 La stream está lista, pero hay que esperar a que se despliegue correctamente, para lo cual deberá actualizar la página hasta que mi-stream se anuncie como "Deployed" (en verde)
 
-Una vez que esté desplegada, vaya al Host y pase algún archivo .txt en el directorio shared (traté de no sea muy grande para que no demore)
+Una vez que esté desplegada, vaya al Host y pase algún archivo .txt en el directorio shared (pruebe con uno que no sea muy grande para que no demore mucho)
 
 Verá que aparece en el mismo directorio shared el archivo WordCountFileSink.log (tal vez deba actualizar la presentación)
 
