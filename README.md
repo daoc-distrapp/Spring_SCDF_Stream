@@ -58,3 +58,20 @@ Vaya al dashboard de SCDF: http://host:9393/dashboard/#/apps y por cada una de l
     - Type: Sink
     - URI: file://root/scdf/wordcountfilesink-0.0.1-SNAPSHOT.jar
 
+Cree la definción de la stream en http://us1.local:9393/dashboard/#/streams/definitions:
+
+- De click en "Create stream(s)"
+- En el cuadro de texto "Enter stream definition..." escriba: `dirmon | fwcount | wcsink`
+- De click en "CreateStream(s)"
+- Escriba en Name: mi-stream (o el nombre que prefiera)
+- De click en "Create the stream"
+- Ubique mi-stream y de click en "Deploy stream"
+- En la siguiente pantalla de click en "Deploy stream"
+
+La stream está lista, pero hay que esperar a que se despliegue correctamente, para lo cual deberá actualizar la página hasta que mi-stream se anuncie como "Deployed" (en verde)
+
+Una vez que esté desplegada, vaya al Host y pase algún archivo .txt en el directorio shared (traté de no sea muy grande para que no demore)
+
+Verá que aparece en el mismo directorio shared el archivo WordCountFileSink.log (tal vez deba actualizar la presentación)
+
+Abra el archivo, y verá que su contenido es el conteo de palabras.
