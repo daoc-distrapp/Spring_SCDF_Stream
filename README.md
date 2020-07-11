@@ -15,11 +15,11 @@ Es necesario que se cree el directorio shared en /root/scdf. Recuerde que /root/
 
 ### dirmonitor
 
-Es la *source* de la stream. Monitorea el directorio /root/scdf/shared, en el servicio Docker, por cualquier nuevo archivo con extensión .txt, y cuando el evento ocurre, pasa al *processor* el nombre del archivo
+Es el *source* de la stream. Monitorea el directorio /root/scdf/shared, en el servicio Docker, por cualquier nuevo archivo con extensión .txt, y cuando el evento ocurre, pasa al *processor* el nombre del archivo
 
 ### filewordcount
 
-Es el *processor* de la stream, y recibe desde la *source* mensajes, que deben contener el path completo a un archivo de texto
+Es el *processor* de la stream, y recibe desde el *source* mensajes, que deben contener el path completo a un archivo de texto
 
 Al recibir el mensaje, abre el archivo, y cuenta la ocurrencia de cada palabra en un Map<String, Integer>. En el Map incluye también una entrada con el path del archivo, para referencia: `__/root/scdf/shared/README.txt=null`
 
@@ -33,10 +33,28 @@ Al recibir el mensaje, abre el archivo de log: WordCountFileSink.log, en /root/s
 
 ## Instalación del ejemplo en el servidor SCDF
 
-Compile cada uno de los tres ejemplos con `mvn package` y copie los jar al directorio desde donde arrancó el servicio Docker, para que pueda acceder a ellos desde /root/scdf en SCDF
+Compile cada uno de los tres ejemplos con `mvn package` y copie los jar al directorio desde el cual arrancó el servicio Docker, para que SCDF pueda acceder a ellos en /root/scdf
 
-Si no desea compilar puede descargarse los jar desde:
+Si no desea compilar, puede descargarse los jar desde:
 
-https://github.com/daoc/maven-repository/raw/master/daoc/scdf/stream/dirmonitor/0.0.1-SNAPSHOT/dirmonitor-0.0.1-SNAPSHOT.jar
-https://github.com/daoc/maven-repository/raw/master/daoc/scdf/stream/filewordcount/0.0.1-SNAPSHOT/filewordcount-0.0.1-SNAPSHOT.jar
-https://github.com/daoc/maven-repository/raw/master/daoc/scdf/stream/wordcountfilesink/0.0.1-SNAPSHOT/wordcountfilesink-0.0.1-SNAPSHOT.jar
+- https://github.com/daoc/maven-repository/raw/master/daoc/scdf/stream/dirmonitor/0.0.1-SNAPSHOT/dirmonitor-0.0.1-SNAPSHOT.jar
+- https://github.com/daoc/maven-repository/raw/master/daoc/scdf/stream/filewordcount/0.0.1-SNAPSHOT/filewordcount-0.0.1-SNAPSHOT.jar
+- https://github.com/daoc/maven-repository/raw/master/daoc/scdf/stream/wordcountfilesink/0.0.1-SNAPSHOT/wordcountfilesink-0.0.1-SNAPSHOT.jar
+
+Vaya al dashboard de SCDF: http://host:9393/dashboard/#/apps y por cada una de las tres aplicaciones:
+
+- De click en: "Add Application(s)" y seleccione "Register one or more applications"
+- Ingrese la información solicitada (solo Name, Type y URI) y luego de click en "Register the application(s)"
+-- Para dirmonitor
+--- Name: dirmon (o el nombre que desee)
+--- Type: Source
+--- URI: file://root/scdf/dirmonitor-0.0.1-SNAPSHOT.jar
+-- Para filewordcount
+--- Name: fwcount (o el nombre que desee)
+--- Type: Processor
+--- URI: file://root/scdf/filewordcount-0.0.1-SNAPSHOT.jar
+-- Para wordcountfilesink
+--- Name: wcsink (o el nombre que desee)
+--- Type: Sink
+--- URI: file://root/scdf/wordcountfilesink-0.0.1-SNAPSHOT.jar
+
